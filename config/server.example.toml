@@ -1,0 +1,44 @@
+listen = "0.0.0.0:443"
+tun_name = "redpill1"
+tun_address = "10.0.1.1"
+tun_prefix_len = 24
+mtu = 1200
+max_connections = 64
+max_bandwidth_mbps = 0    # 0 = unlimited
+metrics_listen = "127.0.0.1:9093"
+psk_file = "/etc/redpill/psk"
+# users_dir = "/etc/redpill/users"  # Enable multi-user mode (*.key files)
+cert_file = "/etc/redpill/quic-cert.pem"
+key_file = "/etc/redpill/quic-key.pem"
+log_level = "info"
+dns = "1.1.1.1"
+
+# ACME autocert (requires --features acme, currently stub - generates self-signed)
+# domain = "vpn.example.com"
+# acme_dir = "/etc/redpill/acme"
+# acme_email = "admin@example.com"
+
+[nat]
+enabled = true
+interface = "ens1"    # WAN interface for NAT masquerade
+
+[decoy]
+enabled = true
+page = "/etc/redpill/decoy.html"
+
+# TCP Reality: active probe deflection (DPI resistance)
+# Listens on a separate port. Non-VPN connections are proxied to the target.
+[reality]
+enabled = false
+listen = "0.0.0.0:8443"
+target = "www.google.com:443"
+
+# WebSocket: CDN-proxied transport (last resort when QUIC + TCP are blocked)
+# Requires a CDN (e.g. Cloudflare) reverse-proxying WebSocket to this listener.
+[websocket]
+enabled = false
+listen = "127.0.0.1:8443"
+
+# Server-side camouflage awareness (informational - logs unknown SNIs)
+# [camouflage]
+# sni_pool = ["dl.google.com", "www.google.com", "fonts.gstatic.com", "www.youtube.com"]

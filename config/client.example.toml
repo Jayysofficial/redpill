@@ -1,0 +1,29 @@
+[server]
+address = "your-server-ip:443"
+cert = "quic-cert.pem"
+psk = "your-64-char-hex-psk"
+# domain = "vpn.example.com"  # Use WebPKI verification (no cert pinning needed)
+
+[transport]
+# Transport mode: "auto", "quic", "quic-camouflaged", "tcp-reality", "websocket"
+# "auto" tries all transports in priority order (fastest first)
+mode = "quic"
+
+# Camouflage settings for censored networks (mode = "quic-camouflaged" or "auto")
+[camouflage]
+sni_pool = ["dl.google.com", "www.google.com", "fonts.gstatic.com", "www.youtube.com"]
+padding = true
+chrome_fingerprint = true
+browser_profile = "chrome"  # Options: "chrome", "firefox", "safari", "random"
+
+# TCP Reality settings (mode = "tcp-reality" or "auto")
+# Falls back to TCP+TLS when QUIC is fully blocked by DPI.
+[reality]
+target = "www.google.com:443"
+# address = "your-server-ip:8443"  # Override server address for Reality port
+
+# WebSocket CDN settings (mode = "websocket" or "auto")
+# Last resort - routes through a CDN reverse proxy.
+# [websocket]
+# url = "wss://cdn.example.com/ws"
+# host = "cdn.example.com"
