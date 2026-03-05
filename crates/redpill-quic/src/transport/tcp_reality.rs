@@ -28,19 +28,19 @@ use super::{SendResult, Transport, TransportError, TransportMode, TransportStats
 /// Maximum frame size (IP packet). Prevents malicious peers from sending huge frames.
 const MAX_FRAME_SIZE: usize = 65535;
 
+type TlsWriter =
+    tokio::io::BufWriter<tokio::io::WriteHalf<tokio_rustls::client::TlsStream<TcpStream>>>;
+type TlsReader =
+    tokio::io::BufReader<tokio::io::ReadHalf<tokio_rustls::client::TlsStream<TcpStream>>>;
+
 /// TCP Reality transport - length-framed IP packets over TLS stream.
 ///
 /// Thread safety: the TLS stream is split into read/write halves
 /// protected by separate mutexes to allow concurrent send/recv.
 /// Writer uses BufWriter for efficient TLS record batching.
 pub struct TcpRealityTransport {
-    writer: Mutex<
-        tokio::io::BufWriter<tokio::io::WriteHalf<tokio_rustls::client::TlsStream<TcpStream>>>,
-    >,
-    reader: Mutex<(
-        tokio::io::BufReader<tokio::io::ReadHalf<tokio_rustls::client::TlsStream<TcpStream>>>,
-        Vec<u8>,
-    )>,
+    writer: Mutex<TlsWriter>,
+    reader: Mutex<(TlsReader, Vec<u8>)>,
 }
 
 impl TcpRealityTransport {
