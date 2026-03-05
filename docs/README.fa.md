@@ -573,15 +573,24 @@ dig +short myip.opendns.com @resolver1.opendns.com
 
 فیچرهای زیر برنامه‌ریزی شدن ولی هنوز پیاده‌سازی نشدن:
 
+**ضد سانسور:**
+- [ ] حالت پروکسی (SOCKS5/HTTP) روی Reality/WebSocket — حذف افت TCP-over-TCP، مثل VLESS کار می‌کنه
+- [ ] پشتیبانی از Encrypted Client Hello (ECH) — SNI رو حتی بدون کموفلاژ از DPI مخفی می‌کنه
+- [ ] مالتی‌پلکسینگ TCP Reality — چندین استریم TLS برای کاهش head-of-line blocking
+- [ ] Domain fronting fallback (جایی که CDN ها هنوز اجازه می‌دن)
+
 **شبکه:**
 - [ ] IPv6 dual-stack (`[::]:443`، تانل `fd00:rpll::/64`)
+- [ ] حالت relay/cascade — مسیریابی از طریق سرورهای واسطه برای دور زدن پیرینگ بد
 - [ ] مهاجرت فعال اتصال QUIC (تشخیص تغییر شبکه)
 - [ ] فیل‌اور چندسروره (لیست سرور با اولویت)
 - [ ] Multi-path (Wi-Fi + سلولار همزمان)
+- [ ] Split tunneling — فقط IP/دامنه‌های مشخص شده از VPN رد بشن
 
 **عملکرد:**
 - [ ] بکند io_uring برای UDP (Linux 5.10+)
-- [ ] AF_XDP کامل برای دور زدن کرنل (Linux 5.9+)
+- [ ] AF_XDP kernel bypass (Linux 5.9+) — فیچر `xdp` فعلی فقط conntrack bypass هست
+- [ ] مسیر داده TUN در kernel-space (کاهش سوئیچ کانتکست userspace)
 
 **امنیت:**
 - [ ] محدودیت نرخ handshake به ازای هر IP (محافظت در برابر brute-force)
@@ -594,6 +603,7 @@ dig +short myip.opendns.com @resolver1.opendns.com
 **کلاینت‌ها:**
 - [ ] کلاینت iOS (NEPacketTunnelProvider)
 - [ ] کلاینت Android
+- [ ] GUI برای macOS/Windows (menubar/tray)
 - [ ] رابط مدیریت تحت وب
 
 ---

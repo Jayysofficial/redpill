@@ -573,15 +573,24 @@ dig +short myip.opendns.com @resolver1.opendns.com
 
 The following features are planned but not yet implemented:
 
+**Anti-Censorship:**
+- [ ] Proxy mode (SOCKS5/HTTP) over Reality/WebSocket — eliminates TCP-over-TCP penalty, works like VLESS
+- [ ] Encrypted Client Hello (ECH) support — hides SNI from DPI even without camouflage
+- [ ] TCP Reality connection multiplexing — multiple TLS streams to reduce head-of-line blocking
+- [ ] Domain fronting fallback (where CDNs still allow it)
+
 **Networking:**
 - [ ] IPv6 dual-stack (`[::]:443`, tunnel `fd00:rpll::/64`)
+- [ ] Relay/cascade mode — route through intermediate servers to bypass bad peering
 - [ ] Proactive QUIC connection migration (network change detection)
 - [ ] Multi-server failover (server list with priority)
 - [ ] Multi-path (Wi-Fi + cellular simultaneously)
+- [ ] Split tunneling — route only specified IPs/domains through VPN
 
 **Performance:**
 - [ ] io_uring UDP backend (Linux 5.10+)
-- [ ] Full AF_XDP kernel bypass (Linux 5.9+)
+- [ ] AF_XDP kernel bypass (Linux 5.9+) — current `xdp` feature is conntrack bypass only
+- [ ] Kernel-space TUN datapath (reduce userspace context switches)
 
 **Security:**
 - [ ] Per-IP handshake rate limiting (brute-force protection)
@@ -594,6 +603,7 @@ The following features are planned but not yet implemented:
 **Clients:**
 - [ ] iOS client (NEPacketTunnelProvider)
 - [ ] Android client
+- [ ] macOS/Windows GUI (menubar/tray app)
 - [ ] Web-based management UI
 
 ---

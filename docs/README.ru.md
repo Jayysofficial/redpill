@@ -4,7 +4,7 @@
 
 Быстрый VPN с обходом цензуры на базе QUIC. Написан на Rust.
 
-> **Статус: MVP / ранняя альфа.** Базовое туннелирование работает и протестировано на macOS/Linux, но возможны шероховатости, ломающие изменения и недостающий функционал. См. [Roadmap](#roadmap).
+> **Статус: MVP / ранняя альфа.** Базовое туннелирование работает и протестировано на macOS/Linux, но возможны шероховатости, ломающие изменения и недостающие функции. См. [Roadmap](#roadmap).
 
 Туннелирует сырые IP-пакеты через QUIC DATAGRAM фреймы (RFC 9221) по UDP:443, TLS 1.3. Внешний QUIC использует no-op congestion controller (фиксированное окно 16 MB), т.к. внутренний TCP сам управляет перегрузкой. Поддерживает несколько транспортных режимов для разных сетевых условий.
 
@@ -573,15 +573,24 @@ dig +short myip.opendns.com @resolver1.opendns.com
 
 Запланировано, но пока не реализовано:
 
+**Антицензура:**
+- [ ] Прокси-режим (SOCKS5/HTTP) поверх Reality/WebSocket — устраняет деградацию TCP-over-TCP, работает как VLESS
+- [ ] Поддержка Encrypted Client Hello (ECH) — скрывает SNI от DPI даже без камуфляжа
+- [ ] Мультиплексирование TCP Reality — несколько TLS-потоков для уменьшения head-of-line blocking
+- [ ] Domain fronting fallback (где CDN ещё позволяют)
+
 **Сеть:**
 - [ ] IPv6 dual-stack (`[::]:443`, туннель `fd00:rpll::/64`)
+- [ ] Relay/каскадный режим — маршрутизация через промежуточные серверы для обхода плохого пиринга
 - [ ] Проактивная QUIC connection migration (детекция смены сети)
 - [ ] Multi-server failover (список серверов с приоритетами)
 - [ ] Multi-path (Wi-Fi + сотовая сеть одновременно)
+- [ ] Split tunneling — направлять через VPN только указанные IP/домены
 
 **Производительность:**
 - [ ] io_uring UDP бэкенд (Linux 5.10+)
-- [ ] Полный AF_XDP kernel bypass (Linux 5.9+)
+- [ ] AF_XDP kernel bypass (Linux 5.9+) — текущий `xdp`-фичафлаг это только conntrack bypass
+- [ ] Kernel-space TUN datapath (уменьшение переключений контекста userspace)
 
 **Безопасность:**
 - [ ] Per-IP rate limiting хэндшейков (защита от брутфорса)
@@ -594,6 +603,7 @@ dig +short myip.opendns.com @resolver1.opendns.com
 **Клиенты:**
 - [ ] iOS-клиент (NEPacketTunnelProvider)
 - [ ] Android-клиент
+- [ ] GUI для macOS/Windows (menubar/tray)
 - [ ] Веб-интерфейс управления
 
 ---

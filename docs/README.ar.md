@@ -573,15 +573,24 @@ dig +short myip.opendns.com @resolver1.opendns.com
 
 الميزات التالية مخطط لها لكنها لم تُنفذ بعد:
 
+**مكافحة الرقابة:**
+- [ ] وضع البروكسي (SOCKS5/HTTP) عبر Reality/WebSocket — يزيل تدهور TCP-over-TCP، يعمل مثل VLESS
+- [ ] دعم Encrypted Client Hello (ECH) — يخفي SNI من DPI حتى بدون التمويه
+- [ ] تعدد إرسال TCP Reality — عدة تدفقات TLS لتقليل head-of-line blocking
+- [ ] Domain fronting احتياطي (حيث لا تزال شبكات CDN تسمح بذلك)
+
 **الشبكات:**
 - [ ] IPv6 dual-stack (`[::]:443`، نفق `fd00:rpll::/64`)
+- [ ] وضع الترحيل/التسلسل — التوجيه عبر سيرفرات وسيطة لتجاوز التناظر السيء
 - [ ] هجرة اتصال QUIC استباقية (كشف تغيّر الشبكة)
 - [ ] تجاوز فشل متعدد السيرفرات (قائمة سيرفرات بأولوية)
 - [ ] مسارات متعددة (Wi-Fi + خلوي في نفس الوقت)
+- [ ] Split tunneling — توجيه عناوين IP/نطاقات محددة فقط عبر VPN
 
 **الأداء:**
 - [ ] واجهة UDP خلفية عبر io_uring (Linux 5.10+)
-- [ ] تجاوز نواة كامل عبر AF_XDP (Linux 5.9+)
+- [ ] AF_XDP kernel bypass (Linux 5.9+) — ميزة `xdp` الحالية هي تجاوز conntrack فقط
+- [ ] مسار بيانات TUN في kernel-space (تقليل تبديل السياق في userspace)
 
 **الأمان:**
 - [ ] تحديد معدل المصافحة لكل IP (حماية من هجمات القوة الغاشمة)
@@ -594,6 +603,7 @@ dig +short myip.opendns.com @resolver1.opendns.com
 **العملاء:**
 - [ ] عميل iOS (NEPacketTunnelProvider)
 - [ ] عميل Android
+- [ ] GUI لـ macOS/Windows (menubar/tray)
 - [ ] واجهة إدارة ويب
 
 ---

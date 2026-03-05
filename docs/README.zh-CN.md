@@ -573,15 +573,24 @@ dig +short myip.opendns.com @resolver1.opendns.com
 
 以下功能已计划但尚未实现：
 
+**反审查：**
+- [ ] 代理模式（SOCKS5/HTTP）通过 Reality/WebSocket — 消除 TCP-over-TCP 性能损失，类似 VLESS
+- [ ] Encrypted Client Hello (ECH) 支持 — 即使不伪装也能对 DPI 隐藏 SNI
+- [ ] TCP Reality 连接多路复用 — 多条 TLS 流减少队头阻塞
+- [ ] Domain fronting 回退（在 CDN 仍允许的情况下）
+
 **网络：**
 - [ ] IPv6 双栈（`[::]:443`，隧道 `fd00:rpll::/64`）
+- [ ] 中继/级联模式 — 通过中间服务器路由以绕过不良对等互联
 - [ ] 主动 QUIC 连接迁移（网络切换检测）
 - [ ] 多服务器故障转移（带优先级的服务器列表）
 - [ ] 多路径（Wi-Fi + 蜂窝同时使用）
+- [ ] 分流隧道 — 仅将指定 IP/域名的流量通过 VPN
 
 **性能：**
 - [ ] io_uring UDP 后端（Linux 5.10+）
-- [ ] 完整 AF_XDP 内核绕过（Linux 5.9+）
+- [ ] AF_XDP 内核绕过（Linux 5.9+）— 当前 `xdp` 功能仅为 conntrack 绕过
+- [ ] 内核空间 TUN 数据路径（减少用户空间上下文切换）
 
 **安全：**
 - [ ] 单 IP 握手速率限制（防暴力破解）
@@ -594,6 +603,7 @@ dig +short myip.opendns.com @resolver1.opendns.com
 **客户端：**
 - [ ] iOS 客户端（NEPacketTunnelProvider）
 - [ ] Android 客户端
+- [ ] macOS/Windows GUI（菜单栏/托盘应用）
 - [ ] Web 管理界面
 
 ---
